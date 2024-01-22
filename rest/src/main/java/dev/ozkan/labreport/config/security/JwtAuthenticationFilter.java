@@ -25,14 +25,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final UserDetailsService userDetailsService;
 
-    private final AuthenticationProperties authenticationProperties;
+    private final CookieProperties cookieProperties;
 
-    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService, AuthenticationProperties authenticationProperties) {
+    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService, CookieProperties cookieProperties) {
         this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
-        this.authenticationProperties = authenticationProperties;
+        this.cookieProperties = cookieProperties;
     }
 
+    /**
+     * Gelen her istek içerisinde bulunan, çerezden yetkilendirme için kullanılan accessToken isimli çerezi ayıklar ve değerini kontrol eder.
+     * Geçerli bir çerez ise createSession() isimli methodu kullanarak bir oturum bilgisi oluşturur ve istek içerisine ekler.
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -43,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
-                if (cookie.getName().equals(authenticationProperties.getCookieName())) {
+                if (cookie.getName().equals(cookieProperties.getCookieName())) {
                     token = cookie.getValue();
                 }
             }

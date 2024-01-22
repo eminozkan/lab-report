@@ -19,8 +19,8 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    private final AuthenticationProperties properties;
-    public SecurityConfig(AuthenticationProvider authenticationProvider, JwtAuthenticationFilter jwtAuthenticationFilter, AuthenticationProperties properties) {
+    private final CookieProperties properties;
+    public SecurityConfig(AuthenticationProvider authenticationProvider, JwtAuthenticationFilter jwtAuthenticationFilter, CookieProperties properties) {
         this.authenticationProvider = authenticationProvider;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.properties = properties;
@@ -57,6 +57,10 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Parametre olarak alınan String nesnesini kontrol eder ve bir ana makine adresi çıkartır.
+     * @return ayrıştırılan ana makine url'ini, parametre boş ise / değerini döner
+     */
     private String extractBaseUrl(String referer) {
         int counter = 0;
         if (ObjectUtils.isEmpty(referer)){

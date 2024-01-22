@@ -8,6 +8,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+/**
+ * Uygulama "dev" isimli profil ile çalıştığında veritabanına bir yönetici hesabı (eğer yoksa) ekleyecektir.
+ */
 @Component
 public class DevProfileApplicationRunner implements CommandLineRunner {
 
