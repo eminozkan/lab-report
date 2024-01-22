@@ -19,6 +19,7 @@ const ViewReportModal = ({ selectedReport, onClose }) => {
 
     const imageURL = blob ? URL.createObjectURL(blob) : null;
 
+    // base64 ile şifreli şekilde tutulan veriyi Blob dizisine dönüştürür. ve ImageModalOpen değerini true yapar.
     const base64ToImage = (buffer) => {
         const blobData = atob(buffer);
         const arrayBuffer = new ArrayBuffer(blobData.length);

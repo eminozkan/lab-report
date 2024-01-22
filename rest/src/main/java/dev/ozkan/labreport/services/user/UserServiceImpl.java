@@ -17,11 +17,20 @@ public class UserServiceImpl implements UserService{
         this.userRepository = userRepository;
     }
 
+    /**
+     * userRepository üzerinde bulunan findAll() methodunu çağırır.
+     * @return Rolü ROLE_MANAGER 'a eşit olmayanları
+     */
     @Override
     public List<User> getUsers() {
         return userRepository.findAll().stream().filter(user -> user.getRole() != UserRole.ROLE_MANAGER).toList();
     }
 
+    /**
+     * userRepository üzerinde bulunan getByUserId() methodunu çağırır.
+     * Kullanıcının isEnabled değerini true ise false, false ise true yaparak userRepository'nin save() methodunu çağırarak günceller.
+     * @return Kullanıcı yok ise CrudResult.failed(), var ise CrudResult.success()
+     */
     @Override
     public CrudResult switchUserIsEnabled(String userId) {
         var userOptional = userRepository.getByUserId(userId);

@@ -13,10 +13,11 @@ const LoginSignup = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate()
 
-
+    // Sayfa üzerinde aktif olan işlem için Api'ye Giriş veya Kayıt olma isteğinde bulunur.
     const handleLoginSignup = async () => {
 
         try {
+            // Giriş işlemi başarılı ise Raporların bulunduğu sayfaya yönlendirir.
             if (action === 'Login') {
                 const response = await axios.post("/api/v1/auth/login", {
                     hospitalIdNumber,
@@ -125,6 +126,8 @@ const LoginSignup = () => {
             <ToastContainer  />
         </div>
     );
+
+    // Sayfada Login ve Signup isimli bileşenler arasında geçiş olduğunda inputların içeriğini temizlemek için kullanılır.
     function clearValues() {
         setHospitalIdNumber('')
         setName('')

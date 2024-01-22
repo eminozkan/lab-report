@@ -19,6 +19,7 @@ const EditReport = ({ reportId, onClose, updateReports }) => {
     setReportImage(file);
   };
 
+  // EditModal üzerinde Submit butonuna tıklandığında raporu güncellemek için Api'ye istekte bulunur.
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedReport = {

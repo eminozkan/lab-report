@@ -34,11 +34,19 @@ public class MedicalReportServiceImpl implements MedicalReportService {
         this.logger = logger;
     }
 
-    private static boolean isImageTypeSupported(MultipartFile imageFile) {
+    /**
+     * Parametre olarak alınan MultipartFile tipindeki dosyanın tipinin sistem tarafından desteklenip desteklenmediğini kontrol eder.
+     * @return eğer destekleniyor ise true, desteklenmiyor ise false
+     */
+    private boolean isImageTypeSupported(MultipartFile imageFile) {
         return Objects.equals(imageFile.getContentType(), MediaType.IMAGE_JPEG_VALUE) ||
                 Objects.equals(imageFile.getContentType(), MediaType.IMAGE_PNG_VALUE);
     }
 
+    /**
+     * Gelen istek içerisinde bulunan verileri, isReportRequestValid() methodu ile kontrol ederek veritabanına kaydetmesi için medicalReportRepository'e gönderir.
+     * @return kontrol sonucunda veriler hatalı ise CrudResult.failed(), işlem başarılı ise CrudResult.success()
+     */
     @Override
     public CrudResult saveMedicalReport(SaveMedicalReportServiceRequest request, String reportWriterId) throws IOException {
         var isRequestValid = isReportRequestValid(request);
@@ -76,6 +84,10 @@ public class MedicalReportServiceImpl implements MedicalReportService {
         return CrudResult.success();
     }
 
+    /**
+     * Gelen istek içerisinde bulunan verileri changeReportFieldsWithNewValues() methodunu kullanarak dönen değeri medicalReportRepository'e raporu güncellemesi için gönderir.
+     * @return Rapor daha önceden kaydedilmemiş ise CrudResult.failed(), işlem başarılı ise CrudResult.success()
+     */
     @Override
     public CrudResult updateMedicalReport(String reportId, UpdateMedicalReportServiceRequest request, String reportUpdaterId) throws IOException {
         var reportOptional = medicalReportRepository.getByReportId(reportId);
@@ -90,6 +102,15 @@ public class MedicalReportServiceImpl implements MedicalReportService {
         return CrudResult.success();
     }
 
+    /**
+     * Gelen search isimli parametreyi boş mu diye kontrol eder,
+     * boş ise getMedicalReports() isimli methodu çağırır ve argüman olarak isDecreasing isimli parametreyi yollar reports isimli değişkene atama yapar.,
+     * Boş değil ise isCharactersAreDigits() methodunu çağırarak, search'ün sayısal değerlerden oluşup oluşmadığını kontrol eder.
+     * Eğer sayısal değerlerden oluşuyor ise getMedicalReportsByPatientId() isimli methodu çağırır ve argüman olarak search ve isDecreasing i yollar ve reports isimli değişkene atama yapar.
+     * Eğer sayısal değerlerden oluşmuyor ise getMedicalReportsByPatientName() isimli methodu çağırır ve argüman olarak search ve isDecreasing i yollar ve reports isimli değişkene atama yapar.
+     * Bu işlem sonucu reports değişkeni boş ise getMedicalReportsByTechnicianName isimli methodu çağırır ve argüman olarak seach ve isDecreasing i yollar ve reports isimli değişkene atama yapar.
+     * @return reports isimli değişkeni döner.
+     */
     @Override
     public List<MedicalReport> listReportsByDateOrder(String search, boolean isDecreasing) {
         List<MedicalReport> reports;
@@ -111,6 +132,12 @@ public class MedicalReportServiceImpl implements MedicalReportService {
         return reports;
     }
 
+    /**
+     * isDecreasing parametresini kontrol eder
+     * Doğru ise; medicalReportRepository 'e ait findAllByReportWriterFullNameContainingOrderByReportDateDesc() isimli methodu çağırır ve search isimli parametreyi argüman olarak yollar ve sonucunu reports isimli değişkene atama yapar.
+     * Yanlış ise; medicalReportRepository 'e ait findAllByReportWriterFullNameContainingOrderByReportDateAsc isimli methodu çağırır ve search isimli parametreyi argüman olarak yollar ve sonucunu reports isimli değişkene atama yapar.
+     * @return reports
+     */
     private List<MedicalReport> getMedicalReportsByTechnicianName(String search, boolean isDecreasing) {
         List<MedicalReport> reports;
             if (isDecreasing) {
@@ -122,6 +149,12 @@ public class MedicalReportServiceImpl implements MedicalReportService {
         return reports;
     }
 
+    /**
+     * isDecreasing parametresini kontrol eder
+     * Doğru ise; medicalReportRepository 'e ait findAllByFullNameContainingOrderByReportDateDesc() isimli methodu çağırır ve search isimli parametreyi argüman olarak yollar ve sonucunu reports isimli değişkene atama yapar.
+     * Yanlış ise; medicalReportRepository 'e ait findAllByFullNameContainingOrderByReportDateAsc isimli methodu çağırır ve search isimli parametreyi argüman olarak yollar ve sonucunu reports isimli değişkene atama yapar.
+     * @return reports
+     */
     private List<MedicalReport> getMedicalReportsByPatientName(String search, boolean isDecreasing) {
         List<MedicalReport> reports;
         if (isDecreasing) {
@@ -132,6 +165,12 @@ public class MedicalReportServiceImpl implements MedicalReportService {
         return reports;
     }
 
+    /**
+     * isDecreasing parametresini kontrol eder
+     * Doğru ise; medicalReportRepository 'e ait findAllByPatientIdNumberContainingOrderByReportDateDesc() isimli methodu çağırır ve search isimli parametreyi argüman olarak yollar ve sonucunu reports isimli değişkene atama yapar.
+     * Yanlış ise; medicalReportRepository 'e ait findAllByPatientIdNumberContainingOrderByReportDateAsc isimli methodu çağırır ve search isimli parametreyi argüman olarak yollar ve sonucunu reports isimli değişkene atama yapar.
+     * @return reports
+     */
     private List<MedicalReport> getMedicalReportsByPatientId(String search, boolean isDecreasing) {
         List<MedicalReport> reports;
         if (isDecreasing) {
@@ -142,6 +181,12 @@ public class MedicalReportServiceImpl implements MedicalReportService {
         return reports;
     }
 
+    /**
+     * isDecreasing parametresini kontrol eder
+     * Doğru ise; medicalReportRepository 'e ait findAllByOrderByReportDateDesc() isimli methodu çağırır ve sonucunu reports isimli değişkene atama yapar.
+     * Yanlış ise; medicalReportRepository 'e ait findAllByOrderByReportDateAsc isimli methodu çağırır ve sonucunu reports isimli değişkene atama yapar.
+     * @return reports
+     */
     private List<MedicalReport> getMedicalReports(boolean isDecreasing) {
         List<MedicalReport> reports;
         if (isDecreasing) {
@@ -152,22 +197,36 @@ public class MedicalReportServiceImpl implements MedicalReportService {
         return reports;
     }
 
+    /**
+     * reportId 'yi kullanarak medicalReportRepository 'e ait getByReportId() methodunu çağırır ve sonucu döner.
+     */
     @Override
     public Optional<MedicalReport> getByReportId(String reportId) {
         return medicalReportRepository.getByReportId(reportId);
     }
 
+    /**
+     * reportId 'yi kullanarak medicalReportRepository 'e ait deleteById() methodunu çağırır.
+     */
     @Override
     public void deleteByReportId(String reportId) {
         medicalReportRepository.deleteById(reportId);
     }
 
+    /**
+     * patientId 'yi kullanarak medicalReportRepository 'e ait findAll() methodunu çağırır ve reports isimli değişkene atama yapar.
+     * @return reports isimli liste içerisinde girilen hasta kimlik numarası ile eşleşen raporları
+     */
     @Override
     public List<MedicalReport> listReportsByPatientId(String patientId) {
         List<MedicalReport> reports = medicalReportRepository.findAll();
         return reports.stream().filter(report -> report.getPatientIdNumber().equals(patientId)).toList();
     }
 
+    /**
+     * Rapor güncellemek için yollanan servis isteği ile Veritabanında kayıtlı olan raporu parametre olarak alır.
+     * Güncellenmek istenen verileri kontrol ederek boş ise eski değerleri, boş değil ise yeni değerleri kullanarak yeni bir MedicalReport objesi oluşturarak bu objeyi döner.
+     */
     private MedicalReport changeReportFieldsWithNewValues(UpdateMedicalReportServiceRequest request, MedicalReport reportFromDb) throws IOException {
         String fileNumber;
         if (ObjectUtils.isEmpty(request.getFileNumber())){
@@ -232,6 +291,10 @@ public class MedicalReportServiceImpl implements MedicalReportService {
 
     }
 
+    /**
+     * Rapor eklemek için yollanan servis isteği içerisinde bulunan verileri kontrol eder.
+     * @return veriler istenen biçimde ise true, değil ise mesaj ile birlikte false
+     */
     private NotValidReportRequest isReportRequestValid(SaveMedicalReportServiceRequest request) {
         if (request.getReportDate().isAfter(LocalDate.now())) {
             return new NotValidReportRequest()
@@ -264,7 +327,10 @@ public class MedicalReportServiceImpl implements MedicalReportService {
                 .setValid(true);
     }
 
-
+    /**
+     * Parametre olarak alınan String içerisinde numerik karakter dışında bir karakter olup olmadığını kontrol eder.
+     * @return eğer sadece numerik karakterlerden oluşuyor ise true, değil ise false
+     */
     private boolean isCharactersAreDigits(String patientIdNumber) {
         for (int i = 0; i < patientIdNumber.length(); i++) {
             if (!Character.isDigit(patientIdNumber.charAt(i))) {
@@ -274,6 +340,10 @@ public class MedicalReportServiceImpl implements MedicalReportService {
         return true;
     }
 
+    /**
+     * Parametre olarak alınan String içerisindeki karakterleri sayısal değere çevirerek TC Kimlik Numarası algoritmasına uyup uymadığını kontrol eder.
+     * @return algoritmaya uyuyor ise true, uymuyor ise false
+     */
     private boolean isValidIdNumber(String patientIdNumber) {
         if (patientIdNumber.charAt(0) == '0') {
             return false;
@@ -313,3 +383,4 @@ public class MedicalReportServiceImpl implements MedicalReportService {
         }
     }
 }
+

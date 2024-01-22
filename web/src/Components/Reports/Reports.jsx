@@ -18,6 +18,7 @@ const Reports = () => {
     const [isDecreasing, setIsDecreasing] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState('');
 
+    // Bir raporun sağ tarafında bulunan kalem sembolüne tıklandığında IsEditModalOpen değerini true yapar ve SelectedIndex değişkenine parametre olarak alınan değeri atar.
     const openEditModal = (index) => {
         setIsEditModalOpen(true)
         setSelectedIndex(index)
@@ -25,7 +26,7 @@ const Reports = () => {
     const closeEditModal = () => setIsEditModalOpen(false);
 
 
-
+    // Tarihe göre sıralama değiştiğinde Apiden raporları getiren fonksiyondur.
     const handleGetReportsByDate = async () => {
         let path = isDecreasing ? "/desc" : "/asc"
         try {
@@ -55,6 +56,8 @@ const Reports = () => {
         setCheckUserAuth(false);
     }
 
+
+    // search-bar isimli text input değeri değiştiğinde Api ye istekte bulunup, girilen değere göre raporların getirilmesini sağlar
     const handleSearch = async (e) => {
         let path = isDecreasing ? "/desc" : "/asc"
         path += "?search=" + e
@@ -71,7 +74,7 @@ const Reports = () => {
         }
     }
 
-
+    // Raporun sağ tarafında bulunan X sembolüne tıklandığında Raporu silmek için Api ye istekte bulunur.
     const deleteReport = async (index) => {
         var id = dataList[index].reportId
         try {

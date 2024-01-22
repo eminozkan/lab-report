@@ -57,6 +57,10 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Parametre olarak alınan String nesnesini kontrol eder ve bir ana makine adresi çıkartır.
+     * @return ayrıştırılan ana makine url'ini, parametre boş ise / değerini döner
+     */
     private String extractBaseUrl(String referer) {
         int counter = 0;
         if (ObjectUtils.isEmpty(referer)){

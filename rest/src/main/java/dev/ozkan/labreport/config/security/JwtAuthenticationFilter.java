@@ -33,6 +33,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         this.authenticationProperties = authenticationProperties;
     }
 
+    /**
+     * Gelen her istek içerisinde bulunan, çerezden yetkilendirme için kullanılan accessToken isimli çerezi ayıklar ve değerini kontrol eder.
+     * Geçerli bir çerez ise createSession() isimli methodu kullanarak bir oturum bilgisi oluşturur ve istek içerisine ekler.
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,

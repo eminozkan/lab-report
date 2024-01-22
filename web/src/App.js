@@ -10,6 +10,7 @@ import AddReport from './Components/AddReport/AddReport';
 import Users from './Components/Users/Users'
 
 function App() {
+  // Uygulama içerisinde bulunan alt sayfalar için oluşturulan rotalar.
   return (
     <div className='container'>
       <Routes>

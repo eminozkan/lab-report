@@ -5,6 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 public class ResultHandler {
+
+    /**
+     * Servisler tarafından dönülen Result objelerinin hatalı sonuçlarını hata tipine göre yönetir.
+     * @return mesaj ve hata tipini kullanarak oluşturulan ResponseEntity
+     */
     public static ResponseEntity<?> handleFailureReason(OperationFailureReason reason, String message){
         switch (reason){
             case CONFLICT -> {

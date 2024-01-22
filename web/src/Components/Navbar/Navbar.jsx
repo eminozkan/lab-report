@@ -9,6 +9,8 @@ import app_logo from '../Assets/app_logo.png'
 const MyNavbar = ({ pageName }) => {
   const [isUserAdminRole, setIsUserAdminRole] = useState('')
   const navigate = useNavigate()
+
+  // Kullanıcı çıkış yapmak istediğinde Api ye istekte bulunur ve kullanıcıyı ana sayfaya yönlendirir.
   const logout = async () => {
     try {
       const response = await axios.get("/api/v1/auth/logout")
@@ -21,7 +23,8 @@ const MyNavbar = ({ pageName }) => {
     }
   }
 
-  
+  /* Sayfa ile beraber Navbar bileşeni yüklenirken kullanıcının çerezi olup olmadığını kontrol etmek için Apiye istekte bulunur. 
+  Hata olmaz ise gelen veriye göre IsUserAdminRole değişkenine atama yapar. Hata olur ise kullanıcıyı ana sayfaya yönlendirir. */
   const hasUserAuthenticationCookie = async () => {
     try {
         const response = await axios.get("/api/v1/session")

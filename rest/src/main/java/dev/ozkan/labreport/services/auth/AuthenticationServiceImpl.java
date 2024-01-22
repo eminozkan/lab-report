@@ -21,6 +21,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         this.jwtService = jwtService;
     }
 
+    /**
+     * Gelen istek içerisinde bulunan Hastahane kimlik numarasının ve parolanın doğruluğunu kontrol eder.
+     * Kullanıcının aktif olup olmadığını kontrol eder.
+     * @return Eğer bilgiler doğru ise ve kullanıcı aktif ise olumlu değil ise olumsuz sonuç döner.
+     */
     @Override
     public AuthenticationResult authenticate(AuthenticationServiceRequest request) {
         final var userOptional = userRepository.getUserByHospitalIdNumber(request.hospitalIdNumber);

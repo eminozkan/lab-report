@@ -46,6 +46,10 @@ public class RegistrationServiceImpl implements RegistrationService {
         return CrudResult.success();
     }
 
+    /**
+     * Parametre olarak alınan String nesnesinin numerik karakterler haricinde bir karakter içerip içermediğini kontrol eder.
+     * @return içeriyor ise true, içermiyor ise false
+     */
     private boolean isHospitalIdContainsAnyCharacterOtherThanNumericCharacters(String hospitalId) {
         for (int i = 0; i < hospitalId.length(); i++) {
             if (!Character.isDigit(hospitalId.charAt(i))) {

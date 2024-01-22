@@ -9,6 +9,9 @@ import java.time.format.DateTimeParseException;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Uygulamanın çalışma sırasında fırlatılan sıradışı durum hatalarını yönetir ve kullanıcıya bir cevap döner.
+ */
 @org.springframework.web.bind.annotation.RestControllerAdvice
 public class GlobalExceptionHandler {
 
