@@ -1,5 +1,5 @@
 # Lab Report
-- Bu proje GNU GPL v3 ile lisanslanmıştır.
+- Bu proje GNU GPL v3 ile lisanslanmıştır ve özgür yazılımdır.
     - ![Version](https://img.shields.io/badge/version-0.0.1-purple.svg)
     - ![Java](https://img.shields.io/badge/Java-17.0.6-orange)
     - ![Node](https://img.shields.io/badge/Node-18.16-green)
@@ -10,13 +10,13 @@ ___________
 
 - ## İnceleyebileceğiniz Başlıklar
 
-    1. [Proje Yapısı](#Proje-Hakkında)
+    1. [Proje Hakkında](#Proje-Hakkında)
     2. [Gereksinimler](#Gereksinimler)
     3. [Kurulumlar](#Kurulumlar)
         - [Backend](#Backend)
             - [Manuel Kurulum](#Manuel-Kurulum)
             - [Docker ile Kurulum](#Docker-ile-Kurulum)
-        - [React App](#React-App)
+        - [Front End](#Front-End)
     4. [Yazılımcı Notları](#Yazılımcı-Notları)
     4. [Katkıda Bulunanlar](#Katkıda-Bulunanlar)
 
@@ -40,7 +40,7 @@ _________________________
 - Eğer kullanıcı bir çereze sahip değilse react uygulaması içerisinde Navbar bileşeninde backend sunucusuna bir istek yollandığından dolayı eğer başarısız ise tekrar anasayfaya yönlendirme yapılmaktadır.
 - Aynı şekilde Users isimli bileşende kullanıcı Yönetici rolüne sahip değilse backendden bir veri gelmeyeceğinden dolayı sayfayı görüntülese bile herhangi bir şekilde bir işlem yapamayacaktır.
 - Backendde Arayüz(Interface) ve Somut(Concrete) sınıf şeklinde tasarlanmıştır. Bu Birim Testi konusunda ve Bağımlılıkların yönetilmesi konusunda avantaj sağladığı içindir.
-- Projenin backendinde JPA Repository ve MySQL kullanılmaktadır.
+- Projenin backendinde veritabanına bağlantı ve işlemleri için JPA Repository ve MySQL kullanılmaktadır.
 - Kullanıcının oturum(session) bilgileri istek atarken kullandığı çerez içerisinde bulunan jwt anahtarından çıkartılmaktadır.
 
 __________________________
@@ -97,7 +97,7 @@ __________________________
             3. Tek yapmanız gereken bu komutu çalıştırmaktır. 
                 `docker compose up`
 
-     2. ### React App
+     2. ### Front End
         - Öncelikle react uygulamasını çalıştırmadan önce bilgisayarınızda NodeJS ve npm kurulu olduğundan ve backend sunusunun çalıştığından emin olunuz.
         - web isimli klasöre girerek `npm install` komutunu çalıştırınız.
         - Sonrasında ise `npm start` komutu ile react uygulamasını çalıştırabilirsiniz.
@@ -113,7 +113,7 @@ __________________________
 ## Katkıda Bulunanlar
 
 ### Katkıda Bulunun
-    1. `fork`
+    1. `fork` (https://github.com/eminozkan/lab-report/fork)
     2. Yeni bir `branch` açın (`git checkout -b feature-name`)
     3. `commit` edin (`git commit -m commit-message`)
     4. Katkıda bulunanlara isminizi ekleyin.
