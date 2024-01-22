@@ -11,6 +11,8 @@ const ReportInquiry = () => {
     const [dataList, setDataList] = useState([]);
     const [blob, setBlob] = useState(new Blob([]));
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Sayfa bulunan butona tıklandığında Api'ye Hasta kimlik numarasına göre raporları getirmek için istekte bulunur.
     const handleGetReports = async () => {
         setIsModalOpen(false)
         try {
@@ -26,6 +28,8 @@ const ReportInquiry = () => {
             }
         }
     }
+
+    // Base64 formatında bulunan veriyi Blob dizisine çevirir ve IsModalOpen değişkeninin değerini true yapar.
     const base64ToImage = (buffer) => {
         const blobData = atob(buffer);
         const arrayBuffer = new ArrayBuffer(blobData.length);
@@ -45,6 +49,7 @@ const ReportInquiry = () => {
 
     const imageURL = blob ? URL.createObjectURL(blob) : null;
 
+    // Sayfada bulunan text bileşeninin değeri değiştiğinde patientIdNumber a değişen textin değerini atar.
     const handleTextChange = (e) =>{
         setPatientIdNumber(e.target.value)
         closeModal()

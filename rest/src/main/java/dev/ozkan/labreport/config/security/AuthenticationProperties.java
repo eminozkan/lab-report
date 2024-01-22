@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CookieProperties {
+public class AuthenticationProperties {
     private String cookieName = "accessToken";
     private String cookiePath = "/api/v1";
 
@@ -15,7 +15,7 @@ public class CookieProperties {
         return cookieName;
     }
 
-    public CookieProperties setCookieName(String cookieName) {
+    public AuthenticationProperties setCookieName(String cookieName) {
         this.cookieName = cookieName;
         return this;
     }
@@ -24,7 +24,7 @@ public class CookieProperties {
         return cookiePath;
     }
 
-    public CookieProperties setCookiePath(String cookiePath) {
+    public AuthenticationProperties setCookiePath(String cookiePath) {
         this.cookiePath = cookiePath;
         return this;
     }
@@ -33,7 +33,7 @@ public class CookieProperties {
         return cookieExpiration;
     }
 
-    public CookieProperties setCookieExpiration(int cookieExpiration) {
+    public AuthenticationProperties setCookieExpiration(int cookieExpiration) {
         this.cookieExpiration = cookieExpiration;
         return this;
     }

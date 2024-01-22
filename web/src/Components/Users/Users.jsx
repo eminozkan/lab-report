@@ -7,6 +7,7 @@ import axios from 'axios';
 function UsersPage() {
     const [users, setUsers] = useState([]);
 
+    // Api ile iletişim kurararak kullanıcı verilerini çeker.
     const getUsers = async () => {
         try {
             const response = await axios.get('/api/v1/users'); 
@@ -16,11 +17,12 @@ function UsersPage() {
         }
     };
 
-    
+    // UsersPage isimli bileşen ilk kez render edildiğinde çağırılır
     useEffect(() => {
         getUsers();
     }, []);
 
+    // Sayfada kullanıcı bilgilerinin sağında bulunan butona basıldığında çalışır, Api'ye istek atarak kullanıcının isEnabled değerinin değişmesini ister.
     const switchIsUserEnabled = async (index) => {
         try{
             const response = await axios.patch('/api/v1/users/' + users[index].userId)

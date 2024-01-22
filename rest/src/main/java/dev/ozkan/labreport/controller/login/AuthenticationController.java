@@ -1,6 +1,6 @@
 package dev.ozkan.labreport.controller.login;
 
-import dev.ozkan.labreport.config.security.CookieProperties;
+import dev.ozkan.labreport.config.security.AuthenticationProperties;
 import dev.ozkan.labreport.services.auth.AuthenticationService;
 import dev.ozkan.labreport.util.result.handler.ResultHandler;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,9 +19,9 @@ import java.util.Map;
 @Validated
 public class AuthenticationController {
     private final AuthenticationService authService;
-    private final CookieProperties properties;
+    private final AuthenticationProperties properties;
 
-    public AuthenticationController(AuthenticationService authService, CookieProperties properties) {
+    public AuthenticationController(AuthenticationService authService, AuthenticationProperties properties) {
         this.authService = authService;
         this.properties = properties;
     }

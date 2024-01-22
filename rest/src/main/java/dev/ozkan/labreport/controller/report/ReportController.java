@@ -49,7 +49,7 @@ public class ReportController {
     }
 
     @GetMapping("/{reportId}")
-    ResponseEntity<?> getReportByReportId(@PathVariable String reportId){
+    ResponseEntity<?> listReportsByUserId(@PathVariable String reportId){
         var report = reportService
                 .getByReportId(reportId);
         if (report.isEmpty()){

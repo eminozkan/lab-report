@@ -295,35 +295,35 @@ public class MedicalReportServiceImpl implements MedicalReportService {
      * Rapor eklemek için yollanan servis isteği içerisinde bulunan verileri kontrol eder.
      * @return veriler istenen biçimde ise true, değil ise mesaj ile birlikte false
      */
-    private isSaveReportRequestValid isReportRequestValid(SaveMedicalReportServiceRequest request) {
+    private NotValidReportRequest isReportRequestValid(SaveMedicalReportServiceRequest request) {
         if (request.getReportDate().isAfter(LocalDate.now())) {
-            return new isSaveReportRequestValid()
+            return new NotValidReportRequest()
                     .setValid(false)
                     .setMessage("invalid report date");
         }
         if (request.getPatientIdNumber().length() != 11) {
-            return new isSaveReportRequestValid()
+            return new NotValidReportRequest()
                     .setValid(false)
                     .setMessage("invalid patient id length");
         }
         if (!isCharactersAreDigits(request.getPatientIdNumber())) {
-            return new isSaveReportRequestValid()
+            return new NotValidReportRequest()
                     .setValid(false)
                     .setMessage("invalid type of patient id");
         }
 
         if (!isValidIdNumber(request.getPatientIdNumber())) {
-            return new isSaveReportRequestValid()
+            return new NotValidReportRequest()
                     .setValid(false)
                     .setMessage("invalid patient id");
         }
 
         if (request.getReportImage() == null || !isImageTypeSupported(request.getReportImage())) {
-            return new isSaveReportRequestValid()
+            return new NotValidReportRequest()
                     .setValid(false)
                     .setMessage("report image is empty or not supported type");
         }
-        return new isSaveReportRequestValid()
+        return new NotValidReportRequest()
                 .setValid(true);
     }
 
@@ -360,27 +360,27 @@ public class MedicalReportServiceImpl implements MedicalReportService {
         return sumOf10Digits % 10 == lastDigit;
     }
 
+    private static class NotValidReportRequest {
+        boolean isValid;
+        String message;
+
+        public boolean isValid() {
+            return isValid;
+        }
+
+        public NotValidReportRequest setValid(boolean valid) {
+            isValid = valid;
+            return this;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public NotValidReportRequest setMessage(String message) {
+            this.message = message;
+            return this;
+        }
+    }
 }
 
-class isSaveReportRequestValid {
-    boolean isValid;
-    String message;
-
-    public boolean isValid() {
-        return isValid;
-    }
-
-    public isSaveReportRequestValid setValid(boolean valid) {
-        isValid = valid;
-        return this;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public isSaveReportRequestValid setMessage(String message) {
-        this.message = message;
-        return this;
-    }
-}

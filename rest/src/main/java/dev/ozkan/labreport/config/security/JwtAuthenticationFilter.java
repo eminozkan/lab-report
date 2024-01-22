@@ -25,12 +25,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final UserDetailsService userDetailsService;
 
-    private final CookieProperties cookieProperties;
+    private final AuthenticationProperties authenticationProperties;
 
-    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService, CookieProperties cookieProperties) {
+    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService, AuthenticationProperties authenticationProperties) {
         this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
-        this.cookieProperties = cookieProperties;
+        this.authenticationProperties = authenticationProperties;
     }
 
     /**
@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
-                if (cookie.getName().equals(cookieProperties.getCookieName())) {
+                if (cookie.getName().equals(authenticationProperties.getCookieName())) {
                     token = cookie.getValue();
                 }
             }

@@ -18,7 +18,7 @@ const AddReport = () => {
         reportImage: null,
     });
 
-
+    // Sayfadaki inputlar içerisinin değeri değiştiğinde formData  içerisindeki gerekli değişikliği yapar.
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -26,6 +26,7 @@ const AddReport = () => {
         });
     };
 
+    // Sayfa içerisindeki dosya yükleme kısmından yeni bir dosya yüklendiğinde formData içerisindeki reportImage değerini değiştirir.
     const handleImageChange = (e) => {
         setFormData({
             ...formData,
@@ -40,7 +41,8 @@ const AddReport = () => {
       day: '2-digit',
     }).format(date);
   };
-
+  
+    // Submit butonuna tıklandığında verileri yeni bir formData oluşturarak Apiye bu formData ile istekte bulunur.
     const handleSubmit = async (e) => {
         e.preventDefault();
 
