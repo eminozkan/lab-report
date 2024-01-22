@@ -48,7 +48,7 @@ __________________________
 
 ## Gereksinimler
 
-- #### NodeJS & npm
+- #### npm
     - `https://nodejs.org/en/download/` Windows & Mac
     - `sudo apt install npm` Linux
 
@@ -77,13 +77,10 @@ __________________________
             3. `mvn clean install` Bu komut ile maven sayesinde backend projesi derlenip bir jar dosyası oluşacaktır. 
             4. Sonrasında ise MySQL veritabanı bağlantıları ve diğer seçenekler için aşağıdaki şekilde çalıştırabilirsiniz.
                 
-                    java -jar 
-                        -Dspring.datasource.url=jdbc:mysql://{dburl}/{dbname} 
-                        -Dspring.datasource.username={dbusername}
-                        -Dspring.datasource.password={dbpassword}
-                         target/lab.report.pro-0.0.1-SNAPSHOT.jar
+                    java -jar -Dspring.datasource.url=jdbc:mysql://{dburl}:{dbport}/{dbname} -Dspring.datasource.username={dbusername} -Dspring.datasource.password={dbpassword} target/lab.report.pro-0.0.1-SNAPSHOT.jar
             - dburl : Spring Boot uygulamasının MySQL veritabanına ulaşmak için kullanacağı url. Örneğin;
-            localhost:3306
+            localhost
+            - dbport : MySQL Veritabanınızın çalıştırıldığı port adresi
             - dbname : MySQL veritabanınızda tanımlı olan ve verilerinizin kaydedilmesini istediğiniz veritabanı adı. Örneğin;
             labreport
             - dbusername: MySQL veritabanınızda kayıtlı olan ve DBA yetkisine sahip olan kullanıcı adı. Örneğin;
@@ -92,13 +89,20 @@ __________________________
             password
 
         - #### Docker ile Kurulum
-            1. Eğer bilgilsayarınızda Docker kurulu ise (Windows işletim sistemi kullanıyorsanız WSL de kurulu olmalıdır.)
+            1. Eğer bilgisayarınızda Docker kurulu ise (Windows işletim sistemi kullanıyorsanız WSL de kurulu olmalıdır.)
             2. rest isimli klasör altında bulunan docker compose dosyasını kullanabilirsiniz.
             3. Tek yapmanız gereken bu komutu çalıştırmaktır. 
-                `docker compose up`
+                    `docker compose up`
+                - Eğer Invalid Host Header hatası alıyorsanız. Docker uygulamanız güncel olmayabilir. Güncellemek için (sistem genelinde değişiklik yapabileceğinden dolayı sudo yetkisine ihtiyaç duyacaktır) aşağıdaki komutu çalıştırabilirsiniz.
+                
+                        sudo snap refresh docker --channel=latest/edge
+
+                - Eğer Permission Denied hatası alıyorsanız. Docker Daemon'a erişmek ve çalıştırabilmek için yönetici yetkisi ile çalıştırmalısınız.
+
+                        sudo docker compose up
 
      2. ### Front End
-        - Öncelikle react uygulamasını çalıştırmadan önce bilgisayarınızda NodeJS ve npm kurulu olduğundan ve backend sunusunun çalıştığından emin olunuz.
+        - Öncelikle react uygulamasını çalıştırmadan önce bilgisayarınızda npm kurulu olduğundan ve backend sunucusunun çalıştığından emin olunuz.
         - web isimli klasöre girerek `npm install` komutunu çalıştırınız.
         - Sonrasında ise `npm start` komutu ile react uygulamasını çalıştırabilirsiniz.
         - baseUrl:3000 portundan uygulamaya erişebilirsiniz.
@@ -106,8 +110,12 @@ __________________________
 
 ## Yazılımcı Notları
 - Projeyi yerel sunucunuzda çalıştıracaksanız java -jar komutunu çalıştırırken `-Dspring.profiles.active=dev` çevre değişkenini(environment variable) eklerseniz varsayılan olarak bir yönetici hesabı ekleyecektir. Bu yönetici bilgileri;
+
+        java -jar -Dspring.datasource.url=jdbc:mysql://{dburl}:{dbport}/{dbname} -Dspring.datasource.username={dbusername} -Dspring.datasource.password={dbpassword} -Dspring.profiles.active=dev target/lab.report.pro-0.0.1-SNAPSHOT.jar
+
     - Hastahane Kimlik Numarası: 0123456
     - Parola : admin
+
 
 
 ## Katkıda Bulunanlar
