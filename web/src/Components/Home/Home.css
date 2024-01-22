@@ -1,0 +1,80 @@
+.boxes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin-top: -250px;
+}
+
+.app_logo{
+  display: flex;
+  flex-direction: row;
+  margin-top: 100px;
+  justify-content: center;
+}
+  .app-name {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .name{
+    font-size: 50px;
+    font-weight: 600;
+
+  }
+  
+  img{
+    width: 250px;
+  }
+
+  
+  .box {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    transition: background-color 0.3s, border-color 0.3s; 
+  }
+  
+  .box:hover {
+    background-color: white;
+    border-color: blue;
+    cursor: pointer;
+  }
+  
+  .box-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    color: black;
+  }
+  
+  .box-text {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  
+  .arrow{
+    width: 20px;
+    margin-top: 2px;
+    color: blue;
+    margin-right: 10px;
+  }
+
+  .home{
+    width: fit-content;
+    margin-left: 20px;
+    margin-top: 20px;
+    display: flex;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .back{
+    color: black;
+  }

@@ -1,0 +1,35 @@
+.card {
+    width: 1200px;
+}
+
+.headers {
+    display: flex;
+    justify-content: space-around;
+}
+
+.header,
+.value {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+
+}
+
+.header.start,
+.value.start {
+    flex: 2; 
+}
+
+.column{
+    border: 1px solid #ddd;
+}
+
+.values {
+    display: flex;
+    flex-direction: column;
+}
+
+.user {
+    display: flex;
+    justify-content: space-around;
+}

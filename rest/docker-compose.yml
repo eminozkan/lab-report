@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  mysqldb:
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=labreport
+      - MYSQL_DATABASE=labreport
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+    
+  app:
+    depends_on:
+      - mysqldb
+    build: ./
+    restart: on-failure
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url" : "jdbc:mysql://mysqldb:3306/labreport",
+        "spring.datasource.username" : "root",
+        "spring.datasource.password" : "labreport",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQLDialect",
+        "spring.jpa.hibernate.ddl-auto" : "update",
+        "spring.profiles.active" : "dev"
+      }'
+    stdin_open: true
+    tty: true
+
+volumes:
+  db:

@@ -1,0 +1,54 @@
+.navbar {
+  background-color: #333;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.pageName {
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+  margin-right: 72%;
+}
+
+.nav-links {
+  display: flex;
+  padding: 5px;
+}
+
+.link {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  margin-right: 15px;
+  font-weight: 500;
+}
+
+.link:hover {
+  background-color: white;
+  border-radius: 5px;
+  color: black;
+}
+
+.logout {
+  padding: 10px;
+  background-color: red;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#logout {
+  padding: 3px;
+  color: white;
+  text-align: center;
+}
+
+#logout:hover {
+  text-decoration: underline;
+}

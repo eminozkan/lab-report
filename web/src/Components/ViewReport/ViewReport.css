@@ -1,0 +1,40 @@
+.modal-content {
+    background-color: #fff; 
+    padding: 20px;
+    border-radius: 8px; 
+    max-width: 600px; 
+    margin: 0 auto;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #ff0000; 
+  }
+  
+  .header {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 25px; 
+  }
+  
+  .detail {
+    margin-bottom: 10px;
+  }
+  
+  .detail a {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .detail a:hover {
+    color: #0056b3;
+  }
+  
+  .prefix{
+    font-weight: 500;
+  }
