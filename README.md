@@ -89,18 +89,20 @@ __________________________
             password
 
         - #### Docker ile Kurulum
-            1. Eğer bilgisayarınızda Docker kurulu ise (Windows işletim sistemi kullanıyorsanız WSL de kurulu olmalıdır.)
+            1. Eğer bilgisayarınızda Docker ve Docker Compose kurulu ise;
+                - Kurmak için
+
+                        sudo apt install docker.io
+                        sudo apt install docker-compose
+                - Çalıştırmak için
+                        
+                        sudo dockerd
+                        
             2. rest isimli klasör altında bulunan docker compose dosyasını kullanabilirsiniz.
             3. Tek yapmanız gereken bu komutu çalıştırmaktır. 
-                    `docker compose up`
-                - Eğer Invalid Host Header hatası alıyorsanız. Docker uygulamanız güncel olmayabilir. Güncellemek için (sistem genelinde değişiklik yapabileceğinden dolayı sudo yetkisine ihtiyaç duyacaktır) aşağıdaki komutu çalıştırabilirsiniz.
                 
-                        sudo snap refresh docker --channel=latest/edge
-
-                - Eğer Permission Denied hatası alıyorsanız. Docker Daemon'a erişmek ve çalıştırabilmek için yönetici yetkisi ile çalıştırmalısınız.
-
-                        sudo docker compose up
-
+                    sudo docker-compose up
+                
      2. ### Front End
         - Öncelikle react uygulamasını çalıştırmadan önce bilgisayarınızda npm kurulu olduğundan ve backend sunucusunun çalıştığından emin olunuz.
         - web isimli klasöre girerek `npm install` komutunu çalıştırınız.
