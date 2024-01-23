@@ -90,10 +90,7 @@ __________________________
 
         - #### Docker ile Kurulum
             1. Eğer bilgisayarınızda Docker ve Docker Compose kurulu ise;
-                - Kurmak için
-
-                        sudo apt install docker.io
-                        sudo apt install docker-compose
+                - Kurmak için : [bknz](https://docs.docker.com/get-docker/)
                 - Çalıştırmak için
                         
                         sudo dockerd
